@@ -1,0 +1,17 @@
+grammar ::= (name '::=' expression end)*
+expression ::= expression-sequence ('|' expression-sequence)*
+expression-squence ::= expression-part+
+expression-part ::=
+  terminal |
+  non-terminal |
+  special |
+  '(' expression ')'
+
+terminal ::=
+  "'" (string-character | "\\'")* "'" |
+  '"' (string-character | '\\"')* '"'
+non-terminal ::= [a-zA-Z0-9\-_]+
+special ::= '[' (string-character | '\\]')* ']'
+
+string-character ::= [any utf-8 character] | '\\\\' | '\\.' | '\\-'
+end ::= [newline without indentation] | [end of file]
