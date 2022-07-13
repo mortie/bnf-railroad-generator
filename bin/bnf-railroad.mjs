@@ -50,7 +50,8 @@ outfile.write(`<!DOCTYPE html>
 <body>
 <style>
 h2 {
-    margin-bottom: 0px;
+    margin-top: 0px;
+    margin-bottom: -10px;
 }
 code pre {
     margin-top: 10px;
@@ -61,7 +62,7 @@ svg.railroad-diagram path {
     fill: rgba(0,0,0,0);
 }
 svg.railroad-diagram text {
-    font: bold 14px monospace;
+    font: bold 13px monospace;
     text-anchor: middle;
     white-space: pre;
 }
@@ -105,6 +106,5 @@ for (let key of Object.keys(grammar)) {
 	outfile.write(new rr.Diagram([createRailroad(grammar[key])]).toString());
 	outfile.write("\n</div>\n");
 }
-outfile.write(`<div>\n<h2>BNF:</h2>\n<code><pre>${sanitizeHtml(text)}</pre></code>\n</div>\n`);
 outfile.write("</body>\n</html>\n");
 outfile.close();
