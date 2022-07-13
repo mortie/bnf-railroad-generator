@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 
 import {parseBnf, StringReader} from '../lib/bnf.mjs';
-import * as rr from 'railroad-diagrams';
+import rr from 'railroad-diagrams';
 import * as fs from 'fs';
 
 function createRailroad(node) {
 	if (node.seq) {
-		return new rr.Sequence(...node.seq.map(createRailroad));
+		return new rr.Sequence(node.seq.map(createRailroad));
 	} else if (node.any) {
-		return new rr.Choice(0, ...node.any.map(createRailroad));
+		return new rr.Choice(0, node.any.map(createRailroad));
 	} else if (node.terminal) {
 		return new rr.Terminal(node.terminal);
 	} else if (node.ref) {
@@ -95,7 +95,7 @@ svg.railroad-diagram g.diagram-text:hover path.diagram-text {
 </style>\n`);
 for (let key of Object.keys(grammar)) {
 	outfile.write(`<div>\n<h2>${key}</h2>\n`);
-	outfile.write(new rr.Diagram(createRailroad(grammar[key])).toString());
+	outfile.write(new rr.Diagram([createRailroad(grammar[key])]).toString());
 	outfile.write("\n</div>\n");
 }
 outfile.write(`<div>\n<h2>BNF:</h2>\n<code><pre>${text}</pre></code>\n</div>\n`);
