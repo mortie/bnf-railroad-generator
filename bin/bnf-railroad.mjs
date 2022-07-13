@@ -1,5 +1,7 @@
-import {parseBnf, StringReader} from './bnf.mjs';
-import * as rr from './vendor/railroad.mjs';
+#!/usr/bin/env node
+
+import {parseBnf, StringReader} from '../lib/bnf.mjs';
+import * as rr from 'railroad-diagrams';
 import * as fs from 'fs';
 
 function createRailroad(node) {

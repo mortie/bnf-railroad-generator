@@ -1,0 +1,22 @@
+{
+  "name": "bnf-railroad",
+  "version": "0.1.0",
+  "description": "Generate a railroad diagram from BNF.",
+  "main": "lib/bnf.mjs",
+  "bin": {
+    "bnf-railroad": "bin/bnf-railroad.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mortie/bnf-railroad-generator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mortie/bnf-railroad-generator/issues"
+  },
+  "homepage": "https://github.com/mortie/bnf-railroad-generator#readme",
+  "dependencies": {
+    "railroad-diagrams": "^1.0.0"
+  }
+}
