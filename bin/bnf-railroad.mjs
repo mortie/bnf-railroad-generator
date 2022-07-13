@@ -38,6 +38,13 @@ let outfile = fs.createWriteStream(argv[1]);
 let r = new StringReader(text);
 let grammar = parseBnf(r);
 
+function sanitizeHtml(text) {
+	return text
+		.replace(/&/g, "&amp;")
+		.replace(/</g, "&lt;")
+		.replace(/>/g, "&gt;");
+}
+
 outfile.write(`<!DOCTYPE html>
 <html>
 <body>
@@ -94,10 +101,10 @@ svg.railroad-diagram g.diagram-text:hover path.diagram-text {
 }
 </style>\n`);
 for (let key of Object.keys(grammar)) {
-	outfile.write(`<div>\n<h2>${key}</h2>\n`);
+	outfile.write(`<div>\n<h2>${sanitizeHtml(key)}</h2>\n`);
 	outfile.write(new rr.Diagram([createRailroad(grammar[key])]).toString());
 	outfile.write("\n</div>\n");
 }
-outfile.write(`<div>\n<h2>BNF:</h2>\n<code><pre>${text}</pre></code>\n</div>\n`);
+outfile.write(`<div>\n<h2>BNF:</h2>\n<code><pre>${sanitizeHtml(text)}</pre></code>\n</div>\n`);
 outfile.write("</body>\n</html>\n");
 outfile.close();
