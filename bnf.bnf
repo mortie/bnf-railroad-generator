@@ -5,6 +5,7 @@ expression-part ::=
   terminal |
   non-terminal |
   special |
+  comment |
   '(' expression ')'
 
 terminal ::=
@@ -15,3 +16,5 @@ special ::= '[' (string-character | '\\]')* ']'
 
 string-character ::= [any utf-8 character] | '\\\\' | '\\.' | '\\-'
 end ::= [newline without indentation] | [end of file]
+
+comment ::= ':' (string-character  | '\\:')* ':'

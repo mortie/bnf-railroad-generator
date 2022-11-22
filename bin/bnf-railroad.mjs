@@ -4,6 +4,8 @@ import {parseBnf, StringReader} from '../lib/bnf.mjs';
 import rr from 'railroad-diagrams';
 import * as fs from 'fs';
 
+rr.Diagram.INTERNAL_ALIGNMENT = "left";
+
 function createRailroad(node) {
 	if (node.seq) {
 		return new rr.Sequence(node.seq.map(createRailroad));
@@ -21,6 +23,8 @@ function createRailroad(node) {
 		return new rr.ZeroOrMore(createRailroad(node.repeat0));
 	} else if (node.repeat1) {
 		return new rr.OneOrMore(createRailroad(node.repeat1));
+	} else if (node.comment) {
+		return new rr.Comment(node.comment);
 	} else {
 		console.warn("Bad node:", node);
 		return new rr.Terminal("");
